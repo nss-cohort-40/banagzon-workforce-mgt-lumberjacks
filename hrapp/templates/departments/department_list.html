@@ -4,6 +4,8 @@
 
     <h1>Bangazon Departments</h1>
 
+    <a href="{% url 'hrapp:department_form' %}">Add Department</a>
+
     <ul>
     {% for department in all_departments %}
         <dl>

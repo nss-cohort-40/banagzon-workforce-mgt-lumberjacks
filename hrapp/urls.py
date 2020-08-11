@@ -15,3 +15,4 @@ urlpatterns = [
     path('departments/form', department_form, name='department_form'),
     path('computers/', computer_list, name='computer_list'),
     path('computers/form', computer_form, name='computer_form')
+    ]

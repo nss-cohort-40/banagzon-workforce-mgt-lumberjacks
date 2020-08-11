@@ -17,8 +17,10 @@ def employee_list(request):
                 e.first_name,
                 e.last_name,
                 e.start_date,
-                e.is_supervisor
+                e.is_supervisor,
+                d.id department
             from hrapp_employee e
+            join hrapp_department d on e.department_id = d.id
             """)
 
             all_employees = []
@@ -31,7 +33,7 @@ def employee_list(request):
                 employee.last_name = row['last_name']
                 employee.start_date = row['start_date']
                 employee.is_supervisor = row['is_supervisor']
-                # employee.department = row['department']
+                employee.department_id = row['department']
 
                 all_employees.append(employee)
 
@@ -51,11 +53,12 @@ def employee_list(request):
             db_cursor.execute("""
             INSERT INTO hrapp_employee
             (
-                first_name, last_name, start_date, is_supervisor
+                first_name, last_name, start_date, is_supervisor, department
 
             )
-            VALUES (?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?)
             """,
             (form_data['first_name'], form_data['last_name'],
-                form_data['start_date'], form_data['is_supervisor']))
+                form_data['start_date'], form_data['is_supervisor'], form_data['department']))
+
         return redirect(reverse('hrapp:employees'))

@@ -21,7 +21,7 @@ def get_employee(employee_id):
         return db_cursor.fetchone()
 
 
-@login_required
+
 def employee_form(request):
     if request.method == 'GET':
         employees = get_employees()
@@ -32,7 +32,7 @@ def employee_form(request):
 
         return render(request, template, context)
 
-@login_required
+
 def employee_edit_form(request, employee_id):
 
     if request.method == 'GET':

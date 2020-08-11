@@ -1,0 +1,20 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+
+    <h1>Bangazon Departments</h1>
+
+    <ul>
+    {% for department in all_departments %}
+        <dl>
+            <dt>Department:</dt> 
+            <dd>{{ department.name }}</dd>
+            <dt>Budget:</dt> 
+            <dd>${{ department.budget|floatformat:2 }}</dd>
+            <dt>Number of Employees:</dt>
+            <dd>{{ department.num_of_employees }}</dd>
+        </dl>
+    {% endfor %}
+    </ul>
+
+{% endblock %}

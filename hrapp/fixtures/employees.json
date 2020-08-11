@@ -1,42 +1,101 @@
-  [
+[
     {
-      "model": "hrapp.employee",
-      "pk": 1,
-      "fields": {
-        "first_name": "Joe",
-        "last_name": "Montana",
-        "start_date": "2014-04-05",
-        "is_supervisor": true
-      }
+        "model": "hrapp.employee",
+        "pk": 1,
+        "fields": {
+            "first_name": "John",
+            "last_name": "Doe",
+            "start_date": "2020-08-11",
+            "is_supervisor": false,
+            "department_id": 1
+        }
     },
     {
-      "model": "hrapp.employee",
-      "pk": 2,
-      "fields": {
-        "first_name": "Bilbo",
-        "last_name": "Baggins",
-        "start_date": "2014-04-05",
-        "is_supervisor": true
-      }
+        "model": "hrapp.employee",
+        "pk": 2,
+        "fields": {
+            "first_name": "Jane",
+            "last_name": "Doe",
+            "start_date": "2020-08-11",
+            "is_supervisor": false,
+            "department_id": 1
+        }
     },
     {
-      "model": "hrapp.employee",
-      "pk": 3,
-      "fields": {
-        "first_name": "Mikey",
-        "last_name": "Mayne",
-        "start_date": "2014-04-05",
-        "is_supervisor": false
-      }
+        "model": "hrapp.employee",
+        "pk": 3,
+        "fields": {
+            "first_name": "Bob",
+            "last_name": "Johnson",
+            "start_date": "2020-08-11",
+            "is_supervisor": true,
+            "department_id": 1
+        }
     },
     {
-      "model": "hrapp.employee",
-      "pk": 4,
-      "fields": {
-        "first_name": "Hanky",
-        "last_name": "Panky",
-        "start_date": "2014-04-05",
-        "is_supervisor": false
-      }
+        "model": "hrapp.employee",
+        "pk": 4,
+        "fields": {
+            "first_name": "Dave",
+            "last_name": "Davies",
+            "start_date": "2020-08-11",
+            "is_supervisor": false,
+            "department_id": 2
+        }
+    },
+    {
+        "model": "hrapp.employee",
+        "pk": 5,
+        "fields": {
+            "first_name": "Steve",
+            "last_name": "Stevens",
+            "start_date": "2020-08-11",
+            "is_supervisor": true,
+            "department_id": 2
+        }
+    },
+    {
+        "model": "hrapp.employee",
+        "pk": 6,
+        "fields": {
+            "first_name": "Jeff",
+            "last_name": "Jefferies",
+            "start_date": "2020-08-11",
+            "is_supervisor": false,
+            "department_id": 3
+        }
+    },
+    {
+        "model": "hrapp.employee",
+        "pk": 7,
+        "fields": {
+            "first_name": "George",
+            "last_name": "Jefferson",
+            "start_date": "2020-08-11",
+            "is_supervisor": true,
+            "department_id": 3
+        }
+    },
+    {
+        "model": "hrapp.employee",
+        "pk": 8,
+        "fields": {
+            "first_name": "Bob",
+            "last_name": "Dylan",
+            "start_date": "2020-08-11",
+            "is_supervisor": false,
+            "department_id": 4
+        }
+    },
+    {
+        "model": "hrapp.employee",
+        "pk": 9,
+        "fields": {
+            "first_name": "Randy",
+            "last_name": "Rhodes",
+            "start_date": "2020-08-11",
+            "is_supervisor": true,
+            "department_id": 4
+        }
     }
-  ]
+]

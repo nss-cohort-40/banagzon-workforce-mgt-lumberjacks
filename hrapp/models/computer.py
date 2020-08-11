@@ -10,7 +10,8 @@ class Computer(models.Model):
       decomission_date: This property contains the dicomission date in string form.
       employees: This property contains the many to many relationship with the computer/employee model
     '''
-
+    
+    manufacturer = models.CharField(max_length=20)
     make = models.CharField(max_length=20)
     purchase_date = models.DateField()
     decommission_date = models.DateField(null=True, blank=True, default=None)
@@ -22,3 +23,6 @@ class Computer(models.Model):
 
     def get_absolute_url(self):
         return reverse("Computer_detail", kwargs={"pk": self.pk})
+
+    def __str__(self):
+        return f"{self.manufacturer} {self.make}"

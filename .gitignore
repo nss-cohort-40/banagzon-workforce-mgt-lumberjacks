@@ -34,3 +34,6 @@ migrations
 
 #db location
 hrapp/views/connection.py
+
+#sql session
+*.sql

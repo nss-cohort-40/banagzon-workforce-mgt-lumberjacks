@@ -1,0 +1,42 @@
+[
+  {
+      "model": "hrapp.department",
+      "pk": 1,
+      "fields": {
+        "name": "Sales",
+        "budget": 10000
+      }
+  },
+  {
+      "model": "hrapp.department",
+      "pk": 2,
+      "fields": {
+        "name": "IT",
+        "budget": 20000
+      }
+  },
+  {
+      "model": "hrapp.department",
+      "pk": 3,
+      "fields": {
+        "name": "HR",
+        "budget": 30000
+      }
+  },
+  {
+      "model": "hrapp.department",
+      "pk": 4,
+      "fields": {
+        "name": "Accounting",
+        "budget": 40000
+      }
+  },
+  {
+    "model": "hrapp.department",
+    "pk": 5,
+    "fields": {
+      "name": "Customer Service",
+      "budget": 10000
+    }
+  }
+]

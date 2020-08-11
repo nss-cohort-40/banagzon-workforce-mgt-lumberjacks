@@ -56,6 +56,6 @@ def computer_list(request):
             ''',
             (form_data['manufacturer'], form_data['make'], form_data['purchase_date']))
 
-        return redirect(reverse('hrapp:computers'))
+        return redirect(reverse('hrapp:computer_list'))
 
             

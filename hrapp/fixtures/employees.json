@@ -1,0 +1,42 @@
+  [
+    {
+      "model": "hrapp.employee",
+      "pk": 1,
+      "fields": {
+        "first_name": "Joe",
+        "last_name": "Montana",
+        "start_date": "2014-04-05",
+        "is_supervisor": true
+      }
+    },
+    {
+      "model": "hrapp.employee",
+      "pk": 2,
+      "fields": {
+        "first_name": "Bilbo",
+        "last_name": "Baggins",
+        "start_date": "2014-04-05",
+        "is_supervisor": true
+      }
+    },
+    {
+      "model": "hrapp.employee",
+      "pk": 3,
+      "fields": {
+        "first_name": "Mikey",
+        "last_name": "Mayne",
+        "start_date": "2014-04-05",
+        "is_supervisor": false
+      }
+    },
+    {
+      "model": "hrapp.employee",
+      "pk": 4,
+      "fields": {
+        "first_name": "Hanky",
+        "last_name": "Panky",
+        "start_date": "2014-04-05",
+        "is_supervisor": false
+      }
+    }
+  ]

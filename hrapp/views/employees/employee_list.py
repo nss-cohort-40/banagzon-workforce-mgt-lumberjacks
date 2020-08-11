@@ -53,7 +53,7 @@ def employee_list(request):
             db_cursor.execute("""
             INSERT INTO hrapp_employee
             (
-                first_name, last_name, start_date, is_supervisor, department
+                first_name, last_name, start_date, is_supervisor, department_id
 
             )
             VALUES (?, ?, ?, ?, ?)
@@ -61,4 +61,4 @@ def employee_list(request):
             (form_data['first_name'], form_data['last_name'],
                 form_data['start_date'], form_data['is_supervisor'], form_data['department']))
 
-        return redirect(reverse('hrapp:employees'))
+        return redirect(reverse('hrapp:employee_list'))

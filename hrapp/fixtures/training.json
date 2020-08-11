@@ -1,0 +1,13 @@
+[
+    {
+        "model": "hrapp.training_program",
+        "pk": 1,
+        "fields": {
+            "program_name": "Diversity Day",
+            "program_description": "A training catered towards educating employees on cultural diversity.",
+            "start_date": "2020-8-13",
+            "end_date": "2020-8-14",
+            "max_attendees": 20
+        }
+    }
+]

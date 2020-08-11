@@ -4,7 +4,7 @@
     <h1>Add Computer</h1>
 
 
-    <form action="{% url 'hrapp:computers' %}" method="post">
+    <form action="{% url 'hrapp:computer_list' %}" method="post">
       {% csrf_token %}
       <fieldset>
           <label for="manufacturer">Manufacturer: </label>

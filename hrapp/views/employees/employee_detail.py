@@ -35,3 +35,4 @@ def employee_details(request, employee_id):
                     form_data['first_name'], form_data['last_name'], form_data['start_date'],
                     supervisor, form_data['department_id'], employee_id,
                 ))
+            return redirect(reverse('hrapp:employees'))

@@ -16,5 +16,6 @@ urlpatterns = [
     path('training/', training_list, name='training_list'),
     path('departments/form', department_form, name='department_form'),
     path('computers/', computer_list, name='computer_list'),
-    path('computers/form', computer_form, name='computer_form')
+    path('computers/form', computer_form, name='computer_form'),
+    path('computers/<int:computer_id>/', computer_details, name='computer')
 ]

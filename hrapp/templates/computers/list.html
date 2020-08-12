@@ -8,7 +8,9 @@
 <ol>
 {% for computer in all_computers %}
     <li>
-        <p>{{ computer }}</p>
+        <a href='{% url 'hrapp:computer' computer.id %}'>
+            <p>{{ computer }}</p>
+        </a>
     </li>
 {% endfor %}
 </ol>

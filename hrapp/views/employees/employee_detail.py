@@ -8,11 +8,14 @@ from hrapp.views.employees.employee_form import get_employee
 def employee_details(request, employee_id):
     if request.method == "GET":
         employee = get_employee(employee_id)
-        template_name = 'employees/detail.html'
+        template_name = 'employees/employee_detail.html'
         return render(request, template_name, {'employee': employee})
 
     elif request.method == 'POST':
         form_data = request.POST
+        supervisor = 0
+        if 'is_supervisor' in form_data:
+            supervisor = 1
 
         #check if this is editing an employee
         if(
@@ -33,6 +36,6 @@ def employee_details(request, employee_id):
                 """,
                 (
                     form_data['first_name'], form_data['last_name'], form_data['start_date'],
-                    supervisor, form_data['department_id'], employee_id,
+                    supervisor, form_data['department'], employee_id,
                 ))
-            return redirect(reverse('hrapp:employees'))
+            return redirect(reverse('hrapp:employee_list'))

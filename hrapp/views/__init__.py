@@ -1,4 +1,5 @@
 from .employees.employee_list import employee_list
+from .employees.employee_detail import employee_details
 from .employees.employee_form import employee_form
 from .employees.employee_form import employee_edit_form
 from .departments.department_list import department_list

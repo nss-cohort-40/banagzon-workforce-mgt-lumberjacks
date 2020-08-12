@@ -4,4 +4,34 @@
 
     <h1>Create New Training Program</h1>
 
+    <form action="{% url 'hrapp:training_list' %}" method="POST">
+        {% csrf_token%}
+        <fieldset>
+            <label for="program_name">Program Name :</label>
+            <input id="program_name" type="text" name="program_name">
+        </fieldset>
+
+        <fieldset>
+            <label for="program_description">Program Description: </label>
+            <input id="program_description" type="text" name="program_description">
+        </fieldset>
+
+        <fieldset>
+            <label for="start_date">Program Start Date: </label>
+            <input id="start_date" type="date" name="start_date">
+        </fieldset>
+
+        <fieldset>
+            <label for="end_date">Program End Date: </label>
+            <input id="end_date" type="date" name="end_date">
+        </fieldset>
+
+        <fieldset>
+            <label for="max_attendees">Maximum Attendees: </label>
+            <input id="end_date" type="number" name="max_attendees">
+        </fieldset>
+
+        <button type="submit">Add Training Program</button>
+    </form>
+
 {%endblock%}

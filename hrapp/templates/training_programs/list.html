@@ -2,11 +2,11 @@
 
 {% block content %}
 <h1>Training Programs</h1>
-<a href="{% url 'hrapp:training_form' %}"/><button> Create New Program</button>
+<a href="{% url 'hrapp:training_form' %}">Add New Program </a>
 <ol>
 {% for program in all_training %}
     <li>
-        <p>{{ program }}</p>
+        <p>{{ program }} | {{program.start}} - {{program.end}}</p>
     </li>
 {% endfor %}
 </ol>

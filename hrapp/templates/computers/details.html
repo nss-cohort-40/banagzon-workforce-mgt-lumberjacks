@@ -1,0 +1,9 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    <h1>{{ computer.manufacturer }} {{computer.make}}</h1>
+    <h2>Purchase date: {{ computer.purchase_date }}</h2>
+    {% if computer.decommission_date != None %}
+        <h2>Decommission date: {{computer.decommission_date}}</h2>
+    {% endif %}
+{% endblock %}

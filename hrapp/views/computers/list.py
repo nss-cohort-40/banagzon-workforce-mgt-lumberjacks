@@ -54,19 +54,17 @@ def computer_list(request):
             VALUES (?, ?, ?)
             ''', (form_data['manufacturer'], form_data['make'], form_data['purchase_date']))
 
-            db_cursor.execute('''
-            SELECT *
-            FROM hrapp_computer
-            ORDER BY column
-            DESC LIMIT 1
-            ''')
+            computer_id = db_cursor.execute('''
+                            SELECT c.id computer
+                            FROM hrapp_computer c
+                            ORDER BY id
+                            DESC LIMIT 1
+                            ''')
 
             db_cursor.execute('''
             INSERT INTO hrapp_employeecomputer
-            (
-                employee, computer, assign_date
-            )
+            (employee, computer, assign_date)
             VALUES (?, ?, ?)
-            ''', (form_data['employee'], form_data['computer'], form_data['assign_date']))
+            ''', (form_data['employee'], computer_id, form_data['assign_date']))
 
         return redirect(reverse('hrapp:computer_list'))

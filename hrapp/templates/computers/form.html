@@ -20,14 +20,14 @@
       </fieldset>
       <fieldset>
           <label for="employee">Assign to: </label>
-          <select id="employee" type="text" name="employee_id">
+          <select id="employee" type="text" name="employee">
               {% for employee in all_employees %}
               <option value="{{ employee.id }}">{{ employee.first_name }} {{ employee.last_name }}</option>
               {% endfor %}
           </select>
       </fieldset>
 
-      <input type='hidden' value={% datetime.date.today() %} name='assign_date'>
+      <input type='hidden' value={{ date }} name='assign_date'>
 
       <input type="submit" value="Submit" />
     </form>

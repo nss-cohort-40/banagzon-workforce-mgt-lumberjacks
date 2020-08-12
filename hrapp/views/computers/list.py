@@ -17,7 +17,7 @@ def computer_list(request):
                 c.make,
                 c.purchase_date,
                 c.decommission_date
-            from hrapp_computer c
+            FROM hrapp_computer c
             ''')
 
             all_computers = []

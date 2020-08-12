@@ -2,6 +2,7 @@ import sqlite3
 from django.shortcuts import redirect, reverse, render
 from hrapp.models import Computer
 from ..connection import Connection
+import datetime
 
 def computer_list(request):
     if request.method == 'GET':
@@ -51,9 +52,21 @@ def computer_list(request):
                 manufacturer, make, purchase_date   
             )
             VALUES (?, ?, ?)
-            ''',
-            (form_data['manufacturer'], form_data['make'], form_data['purchase_date']))
+            ''', (form_data['manufacturer'], form_data['make'], form_data['purchase_date']))
+
+            db_cursor.execute('''
+            SELECT *
+            FROM hrapp_computer
+            ORDER BY column
+            DESC LIMIT 1
+            ''')
+
+            db_cursor.execute('''
+            INSERT INTO hrapp_employeecomputer
+            (
+                employee, computer, assign_date
+            )
+            VALUES (?, ?, ?)
+            ''', (form_data['employee'], form_data['computer'], form_data['assign_date']))
 
         return redirect(reverse('hrapp:computer_list'))
-
-            

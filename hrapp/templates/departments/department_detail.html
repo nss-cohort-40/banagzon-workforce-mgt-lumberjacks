@@ -1,0 +1,19 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    {% for dept in department %}
+        <h1>{{ dept.name }}</h1>
+
+        <h2>Employees:</h2>
+        <ul>
+        {% for employee in dept.employees %}
+            {% if not employee.id == None %}
+                <li>{{ employee.first_name }} {{ employee.last_name }}</li>
+            {% elif employees|length == 0 %}
+                <p>No employees work in this department!</p>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    {% endfor %}
+
+{% endblock %}

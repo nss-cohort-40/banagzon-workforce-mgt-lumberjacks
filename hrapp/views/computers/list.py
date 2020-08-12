@@ -32,8 +32,6 @@ def computer_list(request):
 
                 all_computers.append(computer)
 
-            print(all_computers)
-
             template = 'computers/list.html'
             context = {
                 'all_computers': all_computers

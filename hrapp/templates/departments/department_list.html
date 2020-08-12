@@ -1,4 +1,5 @@
 {% extends 'shared/base.html' %}
+{% load humanize %}
 
 {% block content %}
 
@@ -12,7 +13,7 @@
             <dt>Department:</dt> 
             <dd><a href="{% url 'hrapp:department' department.id %}"> {{ department.name }} </a></dd>
             <dt>Budget:</dt> 
-            <dd>${{ department.budget|floatformat:2 }}</dd>
+            <dd>${{ department.budget|floatformat:2|intcomma }}</dd>
             <dt>Number of Employees:</dt>
             <dd>{{ department.employees|length }}</dd>
         </dl>

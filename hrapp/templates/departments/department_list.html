@@ -14,7 +14,7 @@
             <dt>Budget:</dt> 
             <dd>${{ department.budget|floatformat:2 }}</dd>
             <dt>Number of Employees:</dt>
-            <dd>{{ department.num_of_employees }}</dd>
+            <dd>{{ department.employees|length }}</dd>
         </dl>
     {% endfor %}
     </ul>

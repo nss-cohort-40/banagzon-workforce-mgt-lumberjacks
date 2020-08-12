@@ -10,4 +10,4 @@ SELECT
     c.purchase_date,
     c.decommission_date
 FROM hrapp_computer c
-WHERE c.manufacturer = "apple";
+WHERE c.manufacturer LIKE '%ap%';

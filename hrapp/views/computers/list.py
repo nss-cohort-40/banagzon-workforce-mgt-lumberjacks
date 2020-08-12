@@ -8,6 +8,8 @@ def computer_list_by_make(search_keyword):
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
 
+        like_string = f'{search_keyword}%'
+
         db_cursor.execute("""
         SELECT
             c.id,
@@ -16,8 +18,8 @@ def computer_list_by_make(search_keyword):
             c.purchase_date,
             c.decommission_date
         FROM hrapp_computer c
-        WHERE c.make = ?
-        """, (search_keyword,))
+        WHERE c.make LIKE ?
+        """, (like_string,))
 
         all_computers = list()
 
@@ -40,6 +42,8 @@ def computer_list_by_manufacturer(search_keyword):
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
 
+        like_string = f'{search_keyword}%'
+
         db_cursor.execute("""
         SELECT
             c.id,
@@ -48,8 +52,8 @@ def computer_list_by_manufacturer(search_keyword):
             c.purchase_date,
             c.decommission_date
         FROM hrapp_computer c
-        WHERE c.manufacturer LIKE '?%'
-        """, (search_keyword,))
+        WHERE c.manufacturer LIKE ?
+        """, (like_string,))
 
         all_computers = list()
 

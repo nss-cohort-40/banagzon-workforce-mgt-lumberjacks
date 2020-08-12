@@ -48,7 +48,7 @@ def computer_list_by_manufacturer(search_keyword):
             c.purchase_date,
             c.decommission_date
         FROM hrapp_computer c
-        WHERE c.manufacturer = ?
+        WHERE c.manufacturer LIKE '?%'
         """, (search_keyword,))
 
         all_computers = list()

@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1>Training Programs</h1>
-
+<a href="{% url 'hrapp:training_form' %}"/><button> Create New Program</button>
 <ol>
 {% for program in all_training %}
     <li>

@@ -10,3 +10,4 @@ from .computers.list import *
 from .training_program.training_program import *
 from .computers.form import *
 from .training_program.training_form import *
+from .computers.details import *

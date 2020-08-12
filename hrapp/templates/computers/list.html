@@ -4,6 +4,26 @@
 <h1>Computers</h1>
 
     <a href="{% url 'hrapp:computer_form' %}">Add Computer</a>
+    <a href="{% url 'hrapp:computer_list' %}">View All Computers</a>
+    <form action="{% url 'hrapp:computer_list' %}" method="POST">
+        {% csrf_token %}
+        <fieldset>
+            <label for="manufacturer">Filter by Manufacturer:</label>
+            <input id="manufacturer" type="text" name="manufacturer">
+            <input type="hidden" name="actual_method" value="filter_by_manufacturer">
+        </fieldset>
+        <input type="submit" value="Filter" />
+    </form>
+
+    <form action="{% url 'hrapp:computer_list' %}" method="POST">
+        {% csrf_token %}
+        <fieldset>
+            <label for="make">Filter by Make:</label>
+            <input id="make" type="text" name="make">
+            <input type="hidden" name="actual_method" value="filter_by_make">
+        </fieldset>
+        <input type="submit" value="Filter" />
+    </form>
 
 <ol>
 {% for computer in all_computers %}

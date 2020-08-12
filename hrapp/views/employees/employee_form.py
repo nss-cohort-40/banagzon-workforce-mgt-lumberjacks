@@ -1,6 +1,7 @@
 import sqlite3
-from django.shortcuts import render
+from django.shortcuts import render, reverse, redirect
 from django.contrib.auth.decorators import login_required
+from ..connection import Connection
 
 def get_employee(employee_id):
     with sqlite3.connect(Connection.db_path) as conn:
@@ -20,14 +21,29 @@ def get_employee(employee_id):
 
         return db_cursor.fetchone()
 
+def get_departments():
+    with sqlite3.connect(Connection.db_path) as conn:
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        select
+            d.id,
+            d.name,
+            d.budget
+        from hrapp_department d
+        """)
+
+        return db_cursor.fetchall()
+
 
 
 def employee_form(request):
     if request.method == 'GET':
-        employees = get_employees()
-        template = 'books/form.html'
+        departments = get_departments()
+        template = 'employees/employee_form.html'
         context = {
-            'all_libraries': libraries
+            'all_departments': departments
         }
 
         return render(request, template, context)
@@ -36,13 +52,13 @@ def employee_form(request):
 def employee_edit_form(request, employee_id):
 
     if request.method == 'GET':
-        book = get_employee(employee_id)
-        libraries = get_libraries()
+        employee = get_employee(employee_id)
+        departments = get_departments()
 
-        template = 'books/form.html'
+        template = 'employees/employee_form.html'
         context = {
-            'book': book,
-            'all_libraries': libraries
+            'employee': employee,
+            'all_departments': departments
         }
 
         return render(request, template, context)

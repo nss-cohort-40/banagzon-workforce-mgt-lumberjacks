@@ -10,7 +10,7 @@
     {% for department in all_departments %}
         <dl>
             <dt>Department:</dt> 
-            <dd>{{ department.name }}</dd>
+            <dd><a href="{% url 'hrapp:department' department.id %}"> {{ department.name }} </a></dd>
             <dt>Budget:</dt> 
             <dd>${{ department.budget|floatformat:2 }}</dd>
             <dt>Number of Employees:</dt>

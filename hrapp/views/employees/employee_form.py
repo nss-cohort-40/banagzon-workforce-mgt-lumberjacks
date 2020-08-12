@@ -27,16 +27,13 @@ def get_employee(employee_id):
 
 def create_employee(cursor, row):
     _row = sqlite3.Row(cursor, row)
-    supervisor = False
-    if "is_supervisor"== 1 in _row:
-        supervisor = True
 
     employee = Employee()
     employee.id = _row["employee_id"]
     employee.first_name = _row["first_name"]
     employee.last_name = _row["last_name"]
     employee.start_date = _row["start_date"]
-    employee.is_supervisor = supervisor
+    employee.is_supervisor = _row["is_supervisor"]
     employee.department_id = _row["department_id"]
 
     department = Department()

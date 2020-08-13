@@ -3,9 +3,11 @@
 
 {% block content %}
 
+
+
     <dialog id="delete-dialog" class="delete-dialog">
         <div id="delete-dialog-message" class="delete-dialog-message"></div>
-        <form action="{% url 'hrapp:computer' computer.computer_id %}" method="POST">
+        <form action="{% url 'hrapp:computer' computer.id %}" method="POST">
             {% csrf_token %}
             <input type="hidden" name="actual_method" value="DELETE">
             <button type="submit">Yes</button>
@@ -18,7 +20,13 @@
     {% if computer.decommission_date != None %}
         <h2>Decommission date: {{computer.decommission_date}}</h2>
     {% endif %}
-    <button type="button" id="delete-prompt-button">Delete</button>
+    {% if  is_assigned == True and computer.decommission_date != None %}
+        <p>This computer was assigned to: {{ computer.assigned_employee.first_name }} {{ computer.assigned_employee.last_name }}</p>
+    {% elif is_assigned == True and computer.decommission_date == None %}
+        <p>This computer is assigned to: {{ computer.assigned_employee.first_name }} {{ computer.assigned_employee.last_name }}</p>
+    {% else %}
+        <button type="button" id="delete-prompt-button">Delete</button>
+    {% endif %}
     {% block scripts %}
         <script src="{% static 'scripts/computers.js' %}"></script>
     {% endblock %}

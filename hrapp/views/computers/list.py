@@ -133,23 +133,23 @@ def computer_list(request):
             with sqlite3.connect(Connection.db_path) as conn:
                 db_cursor = conn.cursor()
 
-            db_cursor.execute('''
-            INSERT INTO hrapp_computer
-            (
-                manufacturer, make, purchase_date   
-            )
-            VALUES (?, ?, ?)
-            ''', (form_data['manufacturer'], form_data['make'], form_data['purchase_date']))
+                db_cursor.execute('''
+                INSERT INTO hrapp_computer
+                (
+                    manufacturer, make, purchase_date   
+                )
+                VALUES (?, ?, ?)
+                ''', (form_data['manufacturer'], form_data['make'], form_data['purchase_date']))
 
-            computer_id = db_cursor.lastrowid
+                computer_id = db_cursor.lastrowid
 
-            db_cursor.execute('''
-            INSERT INTO hrapp_employeecomputer
-            (employee_id, computer_id, assign_date)
-            VALUES (?, ?, ?)
-            ''', (form_data['employee'], computer_id, datetime.date.today()))
+                db_cursor.execute('''
+                INSERT INTO hrapp_employeecomputer
+                (employee_id, computer_id, assign_date)
+                VALUES (?, ?, ?)
+                ''', (form_data['employee'], computer_id, datetime.date.today()))
 
-        return redirect(reverse('hrapp:computer_list'))
+            return redirect(reverse('hrapp:computer_list'))
 
 def create_computer(cursor, row):
     _row = sqlite3.Row(cursor, row)

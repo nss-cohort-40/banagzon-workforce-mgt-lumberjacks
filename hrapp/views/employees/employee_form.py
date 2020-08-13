@@ -41,14 +41,17 @@ def create_employee(cursor, row):
     employee.start_date = _row["start_date"]
     employee.is_supervisor = _row["is_supervisor"]
     employee.department_id = _row["department_id"]
-    employee.computer = Computer()
-    employee.computer.id = _row["compid"]
+
+    computer = Computer()
+    computer.id = _row["compid"]
 
     department = Department()
     department.id = _row["department_id"]
     department.name = _row["department_name"]
 
 
+
+    employee.computer = computer
     employee.department = department
 
     return employee
@@ -74,21 +77,35 @@ def get_computers():
 
         db_cursor.execute("""
         select
-            c.id computer_id,
-            ec.id employee_computer_id,
+            c.id,
             c.make,
             c.manufacturer,
             c.purchase_date,
             c.decommission_date
 
         from hrapp_computer c
-        left join hrapp_employeecomputer ec on ec.computer_id = c.id
         """)
 
         return db_cursor.fetchall()
     
 
+def get_employee_computers(employee_id):
+    with sqlite3.connect(Connection.db_path) as conn:
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
 
+        db_cursor.execute("""
+        select
+            ec.id,
+            ec.computer_id,
+            ec.employee_id,
+            ec.assign_date,
+            ec.unassign_date
+
+        from hrapp_employeecomputer ec
+        """)
+
+        return db_cursor.fetchall()
 
 def employee_form(request):
     if request.method == 'GET':
@@ -96,7 +113,8 @@ def employee_form(request):
         computers = get_computers()
         template = 'employees/employee_form.html'
         context = {
-            'all_departments': departments
+            'all_departments': departments,
+            'all_computers': computers
         }
 
         return render(request, template, context)
@@ -108,12 +126,14 @@ def employee_edit_form(request, employee_id):
         employee = get_employee(employee_id)
         departments = get_departments()
         computers = get_computers()
+        employeecomputers = get_employee_computers(employee_id)
 
         template = 'employees/employee_form.html'
         context = {
             'employee': employee,
             'all_departments': departments,
-            'all_computers': computers
+            'all_computers': computers,
+            'employeecomputers': employeecomputers
         }
 
         return render(request, template, context)

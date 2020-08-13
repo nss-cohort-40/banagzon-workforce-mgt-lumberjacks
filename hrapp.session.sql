@@ -35,3 +35,23 @@ select
 
         from hrapp_computer c
         left join hrapp_employeecomputer ec on ec.computer_id = c.id
+
+select
+            c.id computer_id,
+            ec.computer_id,
+            c.make,
+            c.manufacturer,
+            c.purchase_date,
+            c.decommission_date
+
+        from hrapp_computer c
+        left join hrapp_employeecomputer ec on ec.computer_id = c.id
+
+select
+            ec.id,
+            ec.computer_id,
+            ec.employee_id,
+            ec.assign_date,
+            ec.unassign_date
+
+        from hrapp_employeecomputer ec

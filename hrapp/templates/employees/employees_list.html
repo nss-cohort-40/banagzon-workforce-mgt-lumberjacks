@@ -9,7 +9,7 @@
 {% for employee in employees %}
     <li>
         <p><a href= "{% url 'hrapp:employee' employee.id %}"> {{ employee }} </a> </p>
-        Current computer: {{employee.computer}}
+        Current computer: {{employee.computer.manufacturer}} {{employee.computer.make}} (ID:{{employee.computer.id}})
     </li>
         Department: {{employee.department}}
     

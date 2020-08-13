@@ -38,4 +38,16 @@ def employee_details(request, employee_id):
                     form_data['first_name'], form_data['last_name'], form_data['start_date'],
                     supervisor, form_data['department'], employee_id,
                 ))
+                
+                db_cursor.execute("""
+                UPDATE hrapp_employeecomputer
+                SET computer_id = ?
+                WHERE employee_id = ?
+                """,
+                (
+                     form_data['computer'],employee_id,
+                ))
+
+
+                
             return redirect(reverse('hrapp:employee_list'))

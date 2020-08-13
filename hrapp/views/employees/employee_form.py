@@ -1,7 +1,7 @@
 import sqlite3
 from django.shortcuts import render, reverse, redirect
 from django.contrib.auth.decorators import login_required
-from hrapp.models import Employee, Department, Computer
+from hrapp.models import Employee, Department, Computer, EmployeeComputer
 from ..connection import Connection
 
 def get_employee(employee_id):
@@ -17,9 +17,15 @@ def get_employee(employee_id):
             e.start_date,
             e.is_supervisor,
             e.department_id,
-            d.name department_name
+            d.name department_name,
+            c.id computer_id,
+            c.make,
+            c.manufacturer,
+            ec.computer_id compid
         FROM hrapp_employee e
         JOIN hrapp_department d ON e.department_id = d.id
+        left JOIN hrapp_employeecomputer ec ON e.id = ec.employee_id
+        left JOIN hrapp_computer c ON ec.computer_id = c.id
         WHERE e.id = ?
         """,(employee_id,))
 
@@ -35,10 +41,13 @@ def create_employee(cursor, row):
     employee.start_date = _row["start_date"]
     employee.is_supervisor = _row["is_supervisor"]
     employee.department_id = _row["department_id"]
+    employee.computer = Computer()
+    employee.computer.id = _row["compid"]
 
     department = Department()
     department.id = _row["department_id"]
     department.name = _row["department_name"]
+
 
     employee.department = department
 
@@ -58,12 +67,33 @@ def get_departments():
         """)
 
         return db_cursor.fetchall()
+def get_computers():
+    with sqlite3.connect(Connection.db_path) as conn:
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        select
+            c.id computer_id,
+            ec.id employee_computer_id,
+            c.make,
+            c.manufacturer,
+            c.purchase_date,
+            c.decommission_date
+
+        from hrapp_computer c
+        left join hrapp_employeecomputer ec on ec.computer_id = c.id
+        """)
+
+        return db_cursor.fetchall()
+    
 
 
 
 def employee_form(request):
     if request.method == 'GET':
         departments = get_departments()
+        computers = get_computers()
         template = 'employees/employee_form.html'
         context = {
             'all_departments': departments
@@ -77,11 +107,13 @@ def employee_edit_form(request, employee_id):
     if request.method == 'GET':
         employee = get_employee(employee_id)
         departments = get_departments()
+        computers = get_computers()
 
         template = 'employees/employee_form.html'
         context = {
             'employee': employee,
-            'all_departments': departments
+            'all_departments': departments,
+            'all_computers': computers
         }
 
         return render(request, template, context)

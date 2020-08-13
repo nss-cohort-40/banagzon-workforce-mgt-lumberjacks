@@ -38,6 +38,18 @@
                 {% endfor %}
             </select>
         </fieldset>
+        <fieldset>
+            <label for="computer">Computer: </label>
+            <select id="computer" type="text" name="computer">
+                <option>Choose Computer</option>
+                {% for computer in all_computers %}
+                <option 
+                {% if computer.id == employee.computer.id %}selected{% endif %} value="{{ computer.id }}"
+                {% if employee.computer.id == computer.id%}hidden{%endif%}>
+                    {{ computer.manufacturer }} {{computer.make}} </option>
+                {% endfor %}
+            </select>
+        </fieldset>
 
         {% if employee.id is not None %}
             <input type="hidden" name="actual_method" value="PUT">

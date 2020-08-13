@@ -1,8 +1,7 @@
 import sqlite3
 from django.shortcuts import render, reverse, redirect
-from hrapp.models import Employee
+from hrapp.models import Employee, EmployeeComputer, Computer
 from ..connection import Connection
-
 
 def employee_list(request):
     if request.method == 'GET':
@@ -18,12 +17,20 @@ def employee_list(request):
                 e.last_name,
                 e.start_date,
                 e.is_supervisor,
-                d.id department
+                d.id department,
+                c.id computer_id,
+                c.make computer_make,
+                c.manufacturer,
+                ec.id employee_computer_id
+                
             from hrapp_employee e
-            join hrapp_department d on e.department_id = d.id
+            left join hrapp_department d on e.department_id = d.id
+            left join hrapp_employeecomputer ec on ec.employee_id = e.id
+            left join hrapp_computer c on c.id = ec.computer_id
             """)
 
             all_employees = []
+           
             dataset = db_cursor.fetchall()
 
             for row in dataset:
@@ -34,12 +41,18 @@ def employee_list(request):
                 employee.start_date = row['start_date']
                 employee.is_supervisor = row['is_supervisor']
                 employee.department_id = row['department']
+                employee.computer = Computer()
+                employee.computer.id = row['employee_computer_id']
+                employee.computer.make = row['computer_make']
+                employee.computer.manufacturer = row['manufacturer']
+            
 
                 all_employees.append(employee)
+                
 
         template = 'employees/employees_list.html'
         context = {
-            'employees': all_employees
+            'employees': all_employees  
         }
 
         return render(request, template, context)

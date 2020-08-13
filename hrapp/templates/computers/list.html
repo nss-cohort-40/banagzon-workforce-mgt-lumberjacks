@@ -31,7 +31,9 @@
         <a href='{% url 'hrapp:computer' computer.id %}'>
             <p>{{ computer }}</p>
         </a>
-        <p>Assigned to: {{ computer.employee }}</p>
+        {% if computer.employee.first_name != None %}
+            <p>Assigned to: {{ computer.employee }}</p>
+        {% endif %}
     </li>
 {% endfor %}
 </ol>

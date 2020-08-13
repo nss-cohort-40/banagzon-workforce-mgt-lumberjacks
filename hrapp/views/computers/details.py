@@ -74,8 +74,6 @@ def computer_details(request, computer_id):
 
         if not computer.assigned_employee.id == None:
 
-            print('ASSIGNED')
-
             context = {
                 'computer': computer,
                 'is_assigned': True
@@ -84,8 +82,6 @@ def computer_details(request, computer_id):
             return render(request, template, context)
 
         else:
-
-            print('NOT ASSIGNED')
 
             context = {
                 'computer': computer,

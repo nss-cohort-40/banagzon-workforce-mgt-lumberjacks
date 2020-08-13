@@ -6,11 +6,12 @@
     <a href="{% url 'hrapp:computer_form' %}">Add Computer</a>
 
 <ol>
-{% for computer in all_computers %}
+{% for computer in all_computers.values %}
     <li>
         <a href='{% url 'hrapp:computer' computer.id %}'>
             <p>{{ computer }}</p>
         </a>
+        <p>Assigned to: {{ computer.employee }}</p>
     </li>
 {% endfor %}
 </ol>

@@ -25,7 +25,6 @@ def computer_form(request):
         template = 'computers/form.html'
         context = {
             'all_employees': employees,
-            'date': datetime.date.today()
         }
 
         return render(request, template, context)

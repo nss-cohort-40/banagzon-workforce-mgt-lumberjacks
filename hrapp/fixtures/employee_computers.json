@@ -34,7 +34,7 @@
         "pk": 4,
         "fields": {
           "employee": 4,
-          "computer": 1,
+          "computer": 4,
           "assign_date": "2014-02-11",
           "unassign_date": null
         }

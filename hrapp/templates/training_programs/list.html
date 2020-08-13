@@ -7,6 +7,9 @@
 {% for program in all_training %}
     <li>
         <p>{{ program }} | {{program.start}} - {{program.end}}</p>
+        <button type="button">
+            <a href="{% url 'hrapp:training' program.id %}">Details</a>
+        </button>
     </li>
 {% endfor %}
 </ol>

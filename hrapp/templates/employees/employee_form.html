@@ -24,7 +24,10 @@
         </fieldset>
         <fieldset>
             <label for="is_supervisor">Supervisor: </label>
-            <input id="is_supervisor" type="checkbox" name="is_supervisor" value="{{ employee.is_supervisor }}">
+            <input id="is_supervisor" type="checkbox" name="is_supervisor" value="{{ employee.is_supervisor }}"
+            {%if employee.is_supervisor == 1%} 
+                checked
+            {%endif%}>
         </fieldset>
         <fieldset>
             <label for="department">Department: </label>
@@ -32,6 +35,20 @@
                 {% for department in all_departments %}
                 <option {% if department.id == employee.department_id %}selected{% endif %} value="{{ department.id }}">
                     {{ department.name }}</option>
+                {% endfor %}
+            </select>
+        </fieldset>
+        <fieldset>
+            <label for="computer">Choose Computer:</label>
+            <select id="computer" type="text" name="computer">
+                {% for empcomputer in all_computers %}
+                <option
+                {% comment %} {%if empcomputer.employee_id != NULL%}hidden{%endif%}  {% endcomment %}
+                {% if empcomputer.id == employee.computer.id%}selected{% endif %} 
+                value="{{empcomputer.id}}"
+                >
+                    {{empcomputer.manufacturer}} {{empcomputer.make}} {{empcomputer.id}}
+                </option>
                 {% endfor %}
             </select>
         </fieldset>

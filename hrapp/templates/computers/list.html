@@ -28,7 +28,7 @@
 <ol>
 {% for computer in all_computers.values %}
     <li>
-        <a href='{% url 'hrapp:computer' computer.id %}'>
+        <a href="{% url 'hrapp:computer' computer.id %}">
             <p>{{ computer }}</p>
         </a>
         {% if computer.employee.first_name != None  %}

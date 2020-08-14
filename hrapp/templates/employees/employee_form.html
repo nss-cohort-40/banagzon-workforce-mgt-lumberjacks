@@ -39,11 +39,14 @@
             </select>
         </fieldset>
         <fieldset>
-            <label for="computer">Computer: </label>
+            <label for="computer">Choose Computer:</label>
             <select id="computer" type="text" name="computer">
-                <option>Choose Computer</option>
                 {% for empcomputer in all_computers %}
-                <option {% if empcomputer.id == employee.computer.id%}selected{% endif %} value="{{empcomputer.id}}">
+                <option
+                {% comment %} {%if empcomputer.employee_id != NULL%}hidden{%endif%}  {% endcomment %}
+                {% if empcomputer.id == employee.computer.id%}selected{% endif %} 
+                value="{{empcomputer.id}}"
+                >
                     {{empcomputer.manufacturer}} {{empcomputer.make}} {{empcomputer.id}}
                 </option>
                 {% endfor %}

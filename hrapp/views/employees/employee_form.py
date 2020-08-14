@@ -21,12 +21,14 @@ def get_employee(employee_id):
             c.id computer_id,
             c.make,
             c.manufacturer,
-            ec.computer_id compid
+            ec.computer_id compid,
+            ec.id emp_id
         FROM hrapp_employee e
         JOIN hrapp_department d ON e.department_id = d.id
         left JOIN hrapp_employeecomputer ec ON e.id = ec.employee_id
         left JOIN hrapp_computer c ON ec.computer_id = c.id
-        WHERE e.id = ?
+        WHERE ec.unassign_date ISNULL
+        AND e.id = ?
         """,(employee_id,))
 
         return db_cursor.fetchone()
@@ -41,9 +43,12 @@ def create_employee(cursor, row):
     employee.start_date = _row["start_date"]
     employee.is_supervisor = _row["is_supervisor"]
     employee.department_id = _row["department_id"]
+    employee.emp_id = _row["emp_id"]
 
     computer = Computer()
     computer.id = _row["compid"]
+    computer.make = _row["make"]
+    computer.manufacturer = _row["manufacturer"]
 
     department = Department()
     department.id = _row["department_id"]
@@ -81,9 +86,15 @@ def get_computers():
             c.make,
             c.manufacturer,
             c.purchase_date,
-            c.decommission_date
+            c.decommission_date,
+            ec.employee_id,
+            ec.computer_id,
+            ec.assign_date,
+            ec.unassign_date
 
         from hrapp_computer c
+        left join hrapp_employeecomputer ec on c.id = ec.computer_id
+        where c.decommission_date ISNULL
         """)
 
         return db_cursor.fetchall()

@@ -11,7 +11,6 @@
             <p><a href= "{% url 'hrapp:employee' employee.id %}"> {{ employee }} </a> </p>
             Current computer: {{employee.computer.manufacturer}} {{employee.computer.make}} (ID:{{employee.computer.id}})
         </li>
-            {{employee.employee_computer.unassign_date}}
             Department: {{employee.department}}
     
 {% endfor %}

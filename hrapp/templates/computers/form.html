@@ -21,8 +21,8 @@
       <fieldset>
           <label for="employee">Assign to: </label>
           <select id="employee" type="text" name="employee">
-              {% for employee in all_employees %}
               <option value='None'>Assign to employee</option>
+              {% for employee in employee_dropdown %}
               <option value="{{ employee.id }}">{{ employee.first_name }} {{ employee.last_name }}</option>
               {% endfor %}
           </select>

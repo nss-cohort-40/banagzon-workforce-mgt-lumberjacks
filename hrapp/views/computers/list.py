@@ -1,6 +1,6 @@
 import sqlite3
 from django.shortcuts import redirect, reverse, render
-from hrapp.models import Computer, Employee
+from hrapp.models import Computer, Employee, EmployeeComputer
 from ..connection import Connection
 import datetime
 
@@ -20,11 +20,14 @@ def computer_list_by_make(search_keyword):
             c.decommission_date,
             e.id employee_id,
             e.first_name,
-            e.last_name
+            e.last_name,
+            ec.assign_date,
+            ec.unassign_date
         FROM hrapp_computer c
         LEFT JOIN hrapp_employeecomputer ec ON ec.computer_id = c.id
         LEFT JOIN hrapp_employee e ON e.id = ec.employee_id
-        WHERE c.make LIKE ?
+        WHERE ec.unassign_date ISNULL
+        AND c.make LIKE ?;
         """, (like_string,))
 
         dataset = db_cursor.fetchall()
@@ -52,11 +55,14 @@ def computer_list_by_manufacturer(search_keyword):
             c.decommission_date,
             e.id employee_id,
             e.first_name,
-            e.last_name
+            e.last_name,
+            ec.assign_date,
+            ec.unassign_date
         FROM hrapp_computer c
         LEFT JOIN hrapp_employeecomputer ec ON ec.computer_id = c.id
         LEFT JOIN hrapp_employee e ON e.id = ec.employee_id
-        WHERE c.manufacturer LIKE ?
+        WHERE ec.unassign_date ISNULL
+        AND c.manufacturer LIKE ?;
         """, (like_string,))
 
         dataset = db_cursor.fetchall()
@@ -75,18 +81,21 @@ def computer_list(request):
             db_cursor = conn.cursor()
 
             db_cursor.execute('''
-                SELECT
-                    c.id computer_id,
-                    c.manufacturer,
-                    c.make,
-                    c.purchase_date,
-                    c.decommission_date,
-                    e.id employee_id,
-                    e.first_name,
-                    e.last_name
-                FROM hrapp_computer c
-                LEFT JOIN hrapp_employeecomputer ec ON ec.computer_id = c.id
-                LEFT JOIN hrapp_employee e ON e.id = ec.employee_id;
+            SELECT
+                c.id computer_id,
+                c.manufacturer,
+                c.make,
+                c.purchase_date,
+                c.decommission_date,
+                e.id employee_id,
+                e.first_name,
+                e.last_name,
+                ec.assign_date,
+                ec.unassign_date
+            FROM hrapp_computer c
+            LEFT JOIN hrapp_employeecomputer ec ON ec.computer_id = c.id
+            LEFT JOIN hrapp_employee e ON e.id = ec.employee_id
+            WHERE ec.unassign_date ISNULL;
             ''')
 
             dataset = db_cursor.fetchall()

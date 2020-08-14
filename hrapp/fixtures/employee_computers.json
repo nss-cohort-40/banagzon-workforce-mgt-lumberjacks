@@ -38,5 +38,15 @@
           "assign_date": "2014-02-11",
           "unassign_date": null
         }
-    }
+    },
+    {
+      "model": "hrapp.employeecomputer",
+      "pk": 5,
+      "fields": {
+        "employee": 3,
+        "computer": 3,
+        "assign_date": "2015-03-12",
+        "unassign_date": null
+      }
+  }
 ]
